@@ -6,7 +6,6 @@ using namespace std;
 int centerX = 320, centerY = 240;
 int radius = 150;
 
-/* ---------- Plot Function ---------- */
 void plot(int x, int y)
 {
     glBegin(GL_POINTS);
@@ -14,12 +13,11 @@ void plot(int x, int y)
     glEnd();
 }
 
-/* ---------- Midpoint Circle Algorithm ---------- */
 void midPointCircle(int xc, int yc, int r)
 {
     int x = 0;
     int y = r;
-    int p = 1 - r;   // Correct decision parameter
+    int p = 1 - r;   // Initial decision parameter
 
     while (x <= y)
     {
@@ -33,19 +31,22 @@ void midPointCircle(int xc, int yc, int r)
         plot(xc + y, yc - x);
         plot(xc - y, yc - x);
 
-        x++;
-
         if (p < 0)
-            p += 2 * x + 1;
+        {
+            // East pixel
+            p = p + 2 * x + 3;
+        }
         else
         {
+            // South-East pixel
+            p = p + 2 * x - 2 * y + 5;
             y--;
-            p += 2 * (x - y) + 1;
         }
+
+        x++;
     }
 }
 
-/* ---------- DDA Line Algorithm ---------- */
 void drawLine(int x1, int y1, int x2, int y2)
 {
     float dx = x2 - x1;
@@ -95,13 +96,11 @@ void display()
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(0, 0, 0);
     glPointSize(2);
-
     drawClock();
-
     glFlush();
 }
 
-/* ---------- Init ---------- */
+
 void init()
 {
     glClearColor(1, 1, 1, 1);
