@@ -6,7 +6,6 @@ using namespace std;
 int centerX = 320, centerY = 240;
 int radius = 150;
 
-/* -------- Plot Pixel -------- */
 void plot(int x, int y)
 {
     glBegin(GL_POINTS);
@@ -14,7 +13,6 @@ void plot(int x, int y)
     glEnd();
 }
 
-/* -------- Midpoint Circle Algorithm -------- */
 void midPointCircle(int xc, int yc, int r)
 {
     int x = 0;
@@ -46,7 +44,6 @@ void midPointCircle(int xc, int yc, int r)
     }
 }
 
-/* -------- Bresenham Line Algorithm (From Your Code) -------- */
 void drawLine(int x1, int y1, int x2, int y2)
 {
     int dx, dy, i, e;
